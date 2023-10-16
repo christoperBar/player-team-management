@@ -16,24 +16,18 @@
     <div class="container p-3">
         <div class="card text-center">
             <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
+                <ul class="nav nav-tabs card-head er-tabs">
                     <li class="nav-item">
-                        <a class="nav-link {{ $aktif1 }}" href="/">Player List</a>
+                        <a class="nav-link {{ $aktif1 }}" href="/">Team List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ $aktif2 }}" href="View_addplayer.php">New Player</a>
+                        <a class="nav-link {{ $aktif2 }}" href="/add-team">New Team</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ $aktif3 }}" href="View_team.php">Team List</a>
+                        <a class="nav-link {{ $aktif3 }}" href="/players">Player List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ $aktif4 }}" href="View_addteam.php">New Team</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ $aktif5 }}" href="View_playerteam.php">Player Team Relation</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ $aktif6 }}" href="View_addplayerteam.php">New Player Team Relation</a>
+                        <a class="nav-link {{ $aktif4 }}" href="/player">New Player</a>
                     </li>
                 </ul>
             </div>

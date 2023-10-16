@@ -15,33 +15,30 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    @if (!$teams)
-                        <p>balap</p>
-                    @else
-                        @foreach ($teams as $team)
-                            <th scope="row">{{ $team->id }}</th>
+                @if (!$teams)
+                    <p>balap</p>
+                @else
+                    @foreach ($teams as $index => $team)
+                        <tr>
+                            <th scope="row">{{ $index +1}}</th>
                             <td>{{ $team->nama }}</td>
                             <td>{{ $team->alamat }}</td>
                             <td>{{ $team->kota }}</td>
                             <td>{{ $team->telp }}</td>
-                        @endforeach
-                    @endif
-
-                    <td>
-                        <a href="View_updateteam.php?updateID=1">
-                            <button class="btn btn-warning">Update</button>
-                        </a>
-                        <a href="Controller_team.php?deleteID=1">
-                            <button class="btn btn-danger">Delete</button>
-                        </a>
-                    </td>
-                </tr>
-
-
+                            <td>
+                                <a href="/team/{{ $team->id }}">
+                                    <button class="btn btn-warning">Update</button>
+                                </a>
+                                <form action="/team/{{ $team->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
-
     </div>
-
 @endsection

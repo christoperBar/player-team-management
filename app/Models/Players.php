@@ -8,12 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Players extends Model
 {
     use HasFactory;
-    protected $lihatPlayer = [
+    protected $fillable = [
         'nama_player',
         'umur',
         'email',
         'role',
         'team_id'
     ];
+
+    public function team() {
+        return $this->belongsTo(Team::class, 'team_id');
+    }
 
 }
