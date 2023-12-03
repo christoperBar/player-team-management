@@ -19,15 +19,22 @@ class TeamsController extends Controller
         return redirect('/');
     }
 
-    function showAllTeams(){
-        $semuatim = Team::all();
+    function showAllTeams(Request $request){
+        if($request->has('search')){
+            $semuatim = Team::where('nama', 'like', '%'.$request->search.'%')->orWhere('alamat', 'like', '%'.$request->search.'%')->paginate(5)->withQueryString();
+        }
+        else{
+            $semuatim = Team::paginate(5);
+        }    
+        
         return view('teamList',[
             'teams' => $semuatim,
             "pagetitle" => "Team List",
             "aktif1" => "active",
             "aktif2" => "",
             "aktif3" => "",
-            "aktif4" => ""
+            "aktif4" => "",
+            "indek"=> "1",
     ]);
     }
 
@@ -55,7 +62,7 @@ class TeamsController extends Controller
             'kota' => 'required',
         ]);
     
-        $team->update($validatedData);
+        $team->update($validatedData); 
     
         return redirect('/');
     }

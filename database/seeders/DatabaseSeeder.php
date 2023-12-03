@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Players;
+use App\Models\Team;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +20,14 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        Team::factory(16)->create();
+        Players::factory(50)->create();
+
+        $this->call([
+            RoleSeeder::class,
+            UserSeeder::class
+        ]);
+
     }
 }

@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
+        'is_login',
+        'is_active'
     ];
 
     /**
@@ -42,4 +45,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function isAdmin(): bool{
+        if($this->role_id == 1){
+            return true;
+        }
+        return false;
+    }
+
+    public function isEditor(): bool{
+        if($this->role_id == 2){
+            return true;
+        }
+        return false;
+    }
+
+    public function isMember(): bool{
+        if($this->role_id == 3){
+            return true;
+        }
+        return false;
+    }
 }

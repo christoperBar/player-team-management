@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[TeamsController::class,'showAllTeams']);
-Route::get('/team/{team}',[TeamsController::class,'getTeamWithID']);
+Route::get('/',[TeamsController::class,'showAllTeams'])->name('team');
+Route::get('/team/{team}',[TeamsController::class,'getTeamWithID'])->middleware('auth');
 Route::get('/add-team',function(){
     return view('addTeam',
     [
@@ -26,15 +26,18 @@ Route::get('/add-team',function(){
             "aktif4" => ""
     ]
 );
-});
-Route::post('/team', [TeamsController::class, 'createTeam']);
-Route::delete('/team/{team}', [TeamsController::class, 'deleteTeam']);
-Route::match(['put', 'patch'], '/team/{team}', [TeamsController::class, 'updateTeam']);
+})->middleware('auth');
+Route::post('/team', [TeamsController::class, 'createTeam'])->middleware('auth');
+Route::delete('/team/{team}', [TeamsController::class, 'deleteTeam'])->middleware('auth');
+Route::match(['put', 'patch'], '/team/{team}', [TeamsController::class, 'updateTeam'])->middleware('auth');
 
 
-Route::get('/players',[PlayersController::class,'showAllPlayers']);
-Route::get('/player', [PlayersController::class, 'createPlayerForm']);
-Route::post('/player', [PlayersController::class, 'createPlayer']);
-Route::delete('player/{player}', [PlayersController::class, 'deletePlayer']);
-Route::get('/player/{player}',[PlayersController::class,'getPlayerWithID']);
-Route::match(['put', 'patch'], '/player/{player}', [PlayersController::class, 'updatePlayer']);
+Route::get('/players',[PlayersController::class,'showAllPlayers'])->name('player');
+Route::get('/player', [PlayersController::class, 'createPlayerForm'])->middleware('auth');
+Route::post('/player', [PlayersController::class, 'createPlayer'])->middleware('auth');
+Route::delete('player/{player}', [PlayersController::class, 'deletePlayer'])->middleware('auth');
+Route::get('/player/{player}',[PlayersController::class,'getPlayerWithID'])->middleware('auth');
+Route::match(['put', 'patch'], '/player/{player}', [PlayersController::class, 'updatePlayer'])->middleware('auth');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

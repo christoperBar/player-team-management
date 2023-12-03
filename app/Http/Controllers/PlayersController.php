@@ -23,7 +23,7 @@ class PlayersController extends Controller
     }
 
     function createPlayerForm() {
-        $teams = Team::all();
+        $teams = Team::all()->sortBy('nama');
         return view('addPlayer', [
             'teams' => $teams,
             'pagetitle' => 'Add Player',
@@ -35,15 +35,22 @@ class PlayersController extends Controller
     }
     
 
-    function showAllPlayers(){
-        $semuaplayer = Players::with('team')->get();
+    function showAllPlayers(Request $request){
+        if($request->has('search')){
+            $semuaplayer = Players::where('nama_player', 'like', '%'.$request->search.'%')->with('team')->get();
+        }
+        else{
+            $semuaplayer = Players::with('team')->get()->sortBy('team_id');
+        }    
+        
         return view('playerList',[
             'players' => $semuaplayer,
             "pagetitle" => "Player List",
             "aktif1" => "",
             "aktif2" => "",
             "aktif3" => "active",
-            "aktif4" => ""
+            "aktif4" => "",
+            "indek"=> "1"
     ]);
     }
     function deletePlayer(Players $player){
@@ -52,7 +59,7 @@ class PlayersController extends Controller
     }
 
     function getPlayerWithID(Players $player){
-        $teams = Team::all();
+        $teams = Team::all()->sortBy('nama');;
         return view('updatePlayer',[
             'teams' => $teams,
             'player' => $player,

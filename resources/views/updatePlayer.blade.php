@@ -1,6 +1,6 @@
-@extends('layouts.template')
+@extends('layouts.app')
 
-@section('layout_content')
+@section('content')
 <div class="card-body">
     <h1>Update Player</h1>
     <form method="POST" action="/player/{{$player->id }}" class="w-75 mx-auto">
